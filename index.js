@@ -45,6 +45,10 @@ app.get('/detail', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/detail/index.html'));
 });
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
