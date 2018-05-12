@@ -98,7 +98,7 @@
 
     <main role="main">
 
-      <section style="background: linear-gradient(to right, #0d4a72, #41ada4); height: 70px;">
+      <section style="background: linear-gradient(to right, #0d4a72, #41ada4); height: 50px;">
         <div class="container" style="padding-top: 15px;">
 
           <span style="color: white; margin-top: 5px;">SEARCH. RENT. BUY. SELL. <span style="font-weight: bold;">DREAM</span></span>
@@ -106,32 +106,36 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
+      <div class="album py-5">
         <div class="container">
 
           <div class="row">
 
-            <div class="col-md-12" style="height: 100px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="height: 400px;">
 
-              <img src="http://quarteria.herokuapp.com/public/assets/img/home/hero.jpeg" width="300px" height="auto" />
+              <img src="http://quarteria.herokuapp.com/public/assets/img/home/hero.jpeg" style="width: 100%;" height="auto" />
 
+              <div style="width: 100%; height: 185px; float: left; background: linear-gradient(to right, #0d4a72, #41ada4);">
 
-              <div>
+                <div style="float: left; width: 100%; margin-bottom: 15px;">
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-left: 10px; float:left;">
-                  <label class="btn btn-secondary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Buy
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> Rent
-                  </label>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-left: 20px; float: left; margin-top: 20px;">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Buy
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option2" autocomplete="off"> Rent
+                    </label>
+                  </div>
+
+                  <div style="float: left; margin-top: 40px; margin-left: 300px; font-size: 12px; left: 300px; font-weight: bold; color: white;">
+                    PRICE RANGE
+                  </div>
+
                 </div>
 
-                <div>
-                  PRICE RANGE
-                </div>
-
-                <input type="text" class="form-control" style="width: 300px; float:left;" placeholder="Address, Street City, Country, Agent">
+                <input type="text" class="form-control" style="width: 240px; float: left; margin-left: 20px;" placeholder="Address, Street City, Country, Agent">
 
                 <select class="form-control" style="width: 100px; float:left; margin-left: 10px;">
                   <option>+ 0 mi</option>
@@ -164,6 +168,24 @@
               </div>
 
             </div>
+            <div class="col-md-2"></div>
+
+
+
+
+            <div class="where-results-live">
+
+
+            </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -278,6 +300,11 @@
     <script src="https://quarteria.herokuapp.com/public/assets/js/parse.min.js"></script>
 
 
+    <script src="https://quarteria.herokuapp.com/public/assets/js/handlebars.min-latest.js"></script>
+
+
+
+
     <script>
 
       Parse.initialize("G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW");
@@ -320,7 +347,38 @@
         }
       });
 
+
+
+      var source   = document.getElementById("entry-template").innerHTML;
+      var template = Handlebars.compile(source);
+
+
+      var context = {title: "My New Post", body: "This is my first post!"};
+      var html    = template(context);
+
+
+      $('.where-results-live').html(html);
+      //
+
     </script>
+
+
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div class="col-md-6" style="height: 200px;">
+        <a href="https://quarteria.herokuapp.com/detail?id=1BjBaMjcGR">
+        <div style="float: left; width: 100%; height: 225px; overflow: hidden;">
+          <div style="background-color: #0d4a72; position: absolute; right: 15px; top: 15px; height: 40px; width: 150px; color: white; padding: 8px; padding-left: 15px;">
+            $3,456,789
+          </div>
+          <img src="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/32d0d39cb0a1afb8df8e0c4f11004876_16601829_10211977041804536_8773300925715390744_o.jpg" style="width: 100%;" height="auto" />
+        </div>
+        <div style="background-color: #41ada4; float: left; width: 100%; height: 40px; padding: 8px; padding-left: 10px; color: white;">
+          Something Something drive, <span style="font-weight:bold;">New York | USA</span>
+        </div>
+      </a>
+      </div>
+    </script>
+
 
   </body>
 </html>
