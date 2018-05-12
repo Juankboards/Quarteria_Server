@@ -257,25 +257,47 @@
             <div class="col-md-8">
               <div style="float:left; width: 100%;">
                 <div class="image_container">
-                  <img class="parse_img_hero" src="" style="width: 100%; height: 211px;" />
+                  <a class="gallery parse_img_0_link" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
+                    <img class="parse_img_hero" src="" style="width: 100%; height: 211px;" />
+                  </a>
                 </div>
                 <div style="margin-left: 15px;" class="image_container">
-                  <img class="parse_img_1 image_property" src="" style="margin-right: 15px; height: 98px;" />
-                  <img class="parse_img_2 image_property" src="" style="height: 98px;" />
-                  <img class="parse_img_3 image_property" src="" style="margin-top: 15px; margin-right: 15px; height: 98px;" />
-                  <img class="parse_img_4 image_property"src="" style="margin-top: 15px; height: 98px;" />
+
+                  <a class="gallery parse_img_1_link" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
+                    <img class="parse_img_1 image_property" src="" style="margin-right: 15px; height: 98px;" />
+                  </a>
+
+                  <a class="gallery parse_img_2_link" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
+                    <img class="parse_img_2 image_property" src="" style="height: 98px;" />
+                  </a>
+
+                  <a class="gallery parse_img_3_link" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
+                    <img class="parse_img_3 image_property" src="" style="margin-top: 15px; margin-right: 15px; height: 98px;" />
+                  </a>
+
+                  <a class="gallery parse_img_4_link" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
+                    <img class="parse_img_4 image_property" src="" style="margin-top: 15px; height: 98px;" />
+                  </a>
+
                 </div>
               </div>
 
               <div style="float:left; width:100%; margin-top: 40px;">
+
+                <a class="thumbnail parse_img_0_link gallery" href="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/6fe8b02718c402cf8730b165b3ecde84_example_photo_3.png">
                 <div style="float:left; width: 20%;">
                   <img class="attr_img" src="http://quarteria.herokuapp.com/public/assets/img/product_page/pictures.png" style="float: left; margin-left: 15px;" />
                   <span class="attr_label" style="padding-left: 10px; float: left; color: #41ada4;">Pictures</span>
                 </div>
+                </a>
+
+                <a href="" data-featherlight="iframe" class="video-popup" data-featherlight-iframe-height="480" data-featherlight-iframe-width="480">
                 <div style="float:left; width: 20%;">
                   <img class="attr_img" src="http://quarteria.herokuapp.com/public/assets/img/product_page/video.png" style="float: left; margin-left: 15px;" />
                   <span class="attr_label" style="padding-left: 10px; float: left; color: #41ada4;">Videos</span>
                 </div>
+                </a>
+
                 <div style="float:left; width: 20%;">
                   <img class="attr_img" src="http://quarteria.herokuapp.com/public/assets/img/product_page/blueprint.png" style="float: left; margin-left: 15px;" />
                   <span class="attr_label" style="padding-left: 10px; float: left; color: #41ada4;">Blueprint</span>
@@ -284,12 +306,18 @@
                   <img class="attr_img" src="http://quarteria.herokuapp.com/public/assets/img/product_page/360.png" style="float: left; margin-left: 15px;" />
                   <span class="attr_label" style="padding-left: 10px; float: left; color: #41ada4;">360 View</span>
                 </div>
-                <a href="#" data-featherlight="http://quarteria.herokuapp.com/public/assets/img/product_page/blueprint.png">Open image in lightbox</a>
+
+
+                <a href="" data-featherlight="iframe" class="google-maps-popup" data-featherlight-iframe-height="640" data-featherlight-iframe-width="480">
                 <div style="float:left; width: 20%;">
                   <img class="attr_img" src="http://quarteria.herokuapp.com/public/assets/img/product_page/location.png" style="float: left; margin-left: 15px;" />
                   <span class="attr_label" style="padding-left: 10px; float: left; color: #41ada4;">Map</span>
                 </div>
+                </a>
+
+
               </div>
+
 
               <div style="float:left; background: #0d4c73; width:100%; height: 7px; margin-top: 40px; "></div>
 
@@ -337,6 +365,8 @@
                 <span style="float: left; text-align: center; width: 100%; color: #fff;">M: <span style="font-weight: 200;">123-123-1234</span></span>
               </div>
 
+              <form class="customer_email" method="POST" action="">
+
               <div style="float: left; width: 100%; margin-top:25px; ">
                 <input type="text" class="form-control" placeholder="Your email">
               </div>
@@ -346,10 +376,13 @@
               </div>
 
               <div style="float: left; width: 100%; margin-top:15px;">
-                <button type="button" class="btn btn-primary" style="display: block; margin-top: 20px; margin: auto;">Submit</button>
+                <button type="submit" class="btn btn-primary" style="display: block; margin-top: 20px; margin: auto;">Submit</button>
               </div>
 
+              </form>
+
             </div>
+
 
 
           </div>
@@ -368,7 +401,9 @@
     </footer>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <!-- Switch for local -->
     <!-- <script src="/public/assets/js/bootstrap.min.js"></script> -->
@@ -380,8 +415,6 @@
 
     <script src="https://quarteria.herokuapp.com/public/assets/js/featherlight.js"></script>
     <script src="https://quarteria.herokuapp.com/public/assets/js/featherlight.gallery.js"></script>
-
-
 
 
     <script>
@@ -413,11 +446,39 @@
           $('.parse_price').text(gameScore.get("price_dollar"));
 
           $('.parse_img_hero').attr("src",gameScore.get("img_hero")._url);
-
           $('.parse_img_1').attr("src",gameScore.get("img_1")._url);
           $('.parse_img_2').attr("src",gameScore.get("img_2")._url);
           $('.parse_img_3').attr("src",gameScore.get("img_3")._url);
           $('.parse_img_4').attr("src",gameScore.get("img_4")._url);
+
+
+          $('.parse_img_0_link').attr("href",gameScore.get("img_hero")._url);
+          $('.parse_img_1_link').attr("href",gameScore.get("img_1")._url);
+          $('.parse_img_2_link').attr("href",gameScore.get("img_2")._url);
+          $('.parse_img_3_link').attr("href",gameScore.get("img_3")._url);
+          $('.parse_img_4_link').attr("href",gameScore.get("img_4")._url);
+
+          var letsBuild_a_URL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyD66A8SvONgdf9-UxbYS2LWtgEQnXiU46c&q="
+          letsBuild_a_URL = letsBuild_a_URL + gameScore.get("street_address")+" "+gameScore.get("state")+" "+gameScore.get("country")
+
+          $('.google-maps-popup').attr("href",letsBuild_a_URL);
+
+          $('.customer_email').attr("action","https://formspree.io/"+gameScore.get("client_email"));
+          
+          $('.video-popup').attr("href",gameScore.get("video_embed_link"));
+
+  				$('.gallery').featherlightGallery({
+  					gallery: {
+  						fadeIn: 300,
+  						fadeOut: 300,
+              next: 'next »',
+						  previous: '« previous'
+  					},
+  					openSpeed:    300,
+  					closeSpeed:   300
+  				});
+
+
 
         },
         error: function(object, error) {
@@ -425,6 +486,9 @@
           // error is a Parse.Error with an error code and message.
         }
       });
+
+
+
 
     </script>
 
