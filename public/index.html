@@ -100,9 +100,7 @@
 
       <section style="background: linear-gradient(to right, #0d4a72, #41ada4); height: 50px;">
         <div class="container" style="padding-top: 15px;">
-
           <span style="color: white; margin-top: 5px;">SEARCH. RENT. BUY. SELL. <span style="font-weight: bold;">DREAM</span></span>
-
         </div>
       </section>
 
@@ -135,7 +133,8 @@
 
                 </div>
 
-                <input type="text" class="form-control" style="width: 240px; float: left; margin-left: 20px;" placeholder="Address, Street City, Country, Agent">
+
+                <input type="text" class="form-control search-entry" style="width: 240px; float: left; margin-left: 20px;" placeholder="Address, Street City, Country, Agent">
 
                 <select class="form-control" style="width: 100px; float:left; margin-left: 10px;">
                   <option>+ 0 mi</option>
@@ -162,7 +161,7 @@
                 </select>
 
                 <div style="float: left; width: 100%; margin-top:15px;">
-                  <button type="button" class="btn btn-primary" style="display: block; margin-top: 20px; margin: auto;">SEARCH NOW</button>
+                  <button type="button" class="btn btn-primary search-button" style="display: block; margin-top: 20px; margin: auto;">SEARCH NOW</button>
                 </div>
 
               </div>
@@ -173,10 +172,10 @@
 
 
 
-            <div class="where-results-live">
+            <span class="where-results-live col-md-12">
 
 
-            </div>
+            </span>
 
 
 
@@ -305,79 +304,160 @@
 
 
 
+
+
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div class="col-md-6" style="height: 290px; float: left;">
+        <a href="https://quarteria.herokuapp.com/detail?id={{object_id}}">
+        <div style="float: left; width: 100%; height: 225px; overflow: hidden;">
+          <div style="background-color: #0d4a72; position: absolute; right: 15px; top: 15px; height: 40px; width: 150px; color: white; padding: 8px; padding-left: 15px;">
+            ${{price}}
+          </div>
+          <img src="{{img_src}}" style="width: 100%;" height="auto" />
+        </div>
+        <div style="background-color: #41ada4; float: left; width: 100%; height: 40px; padding: 8px; padding-left: 10px; color: white;">
+          {{address}}, <span style="font-weight:bold;">{{state}} | {{country}}</span>
+        </div>
+      </a>
+      </div>
+    </script>
+
+
+
     <script>
 
       Parse.initialize("G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW");
       Parse.serverURL = 'https://quarteria.herokuapp.com/parse'
 
-      var url_string = window.location.href; //window.location.href
-      var url = new URL(url_string);
-      var c = url.searchParams.get("id");
-
       var GameScore = Parse.Object.extend("Properties");
       var query = new Parse.Query(GameScore);
-      query.get(c, {
-        success: function(gameScore) {
+      query.limit(8);
+      query.find({
+        success: function(results) {
 
-          $('.parse_country').text(gameScore.get("country"));
+          var source   = document.getElementById("entry-template").innerHTML;
+          var template = Handlebars.compile(source);
 
-          $('.parse_address').text(gameScore.get("street_address"));
-          $('.parse_city').text(gameScore.get("city"));
-          $('.parse_state').text(gameScore.get("state"));
+          var finalHtml = "";
 
-          $('.parse_build').text(gameScore.get("build"));
-          $('.parse_lot_size').text(gameScore.get("lot_size")+" sq ft.");
-          $('.parse_bedrooms').text(gameScore.get("bedrooms"));
-          $('.parse_prop_area').text(gameScore.get("prop_area")+" sq ft.");
+          for(i = 0; i < results.length; i++) {
+            console.log("hello");
 
-          $('.parse_description').text(gameScore.get("description"));
-          $('.parse_price').text(gameScore.get("price_dollar"));
+            var context = {
+              object_id: results[i].id,
+              price: results[i].get("price_dollar"),
+              img_src: results[i].get("img_hero")._url,
+              address: results[i].get("street_address"),
+              state:results[i].get("state"),
+              country: results[i].get("country")
+            };
+            finalHtml = finalHtml + template(context);
+          }
 
-          $('.parse_img_hero').attr("src",gameScore.get("img_hero")._url);
-
-          $('.parse_img_1').attr("src",gameScore.get("img_1")._url);
-          $('.parse_img_2').attr("src",gameScore.get("img_2")._url);
-          $('.parse_img_3').attr("src",gameScore.get("img_3")._url);
-          $('.parse_img_4').attr("src",gameScore.get("img_4")._url);
+          console.log(finalHtml);
+          $('.where-results-live').html(finalHtml);
 
         },
-        error: function(object, error) {
-          // The object was not retrieved successfully.
-          // error is a Parse.Error with an error code and message.
+        error: function(error) {
+          alert("Error: " + error.code + " " + error.message);
         }
       });
 
 
 
-      var source   = document.getElementById("entry-template").innerHTML;
-      var template = Handlebars.compile(source);
 
 
-      var context = {title: "My New Post", body: "This is my first post!"};
-      var html    = template(context);
+
+      $('.search-button').on('click', function() {
+
+        console.log("Clicked!");
+
+        var GameScore = Parse.Object.extend("Properties");
+        var query = new Parse.Query(GameScore);
+        query.fullText('name', $('.search-entry').val());
+
+        query.find({
+          success: function(results) {
+
+            var source   = document.getElementById("entry-template").innerHTML;
+            var template = Handlebars.compile(source);
+
+            $('.where-results-live').html("");
+            var finalHtml = "";
+
+            for(i = 0; i < results.length; i++) {
+              console.log("hello");
+
+              var context = {
+                object_id: results[i].id,
+                price: results[i].get("price_dollar"),
+                img_src: results[i].get("img_hero")._url,
+                address: results[i].get("street_address"),
+                state:results[i].get("state"),
+                country: results[i].get("country")
+              };
+              finalHtml = finalHtml + template(context);
+            }
+
+            $('.where-results-live').html(finalHtml);
+
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
 
 
-      $('.where-results-live').html(html);
+      })
+
+
       //
+      // var url_string = window.location.href; //window.location.href
+      // var url = new URL(url_string);
+      // var c = url.searchParams.get("id");
+      //
+      // var GameScore = Parse.Object.extend("Properties");
+      // var query = new Parse.Query(GameScore);
+      // query.get(c, {
+      //   success: function(gameScore) {
+      //
+      //     $('.parse_country').text(gameScore.get("country"));
+      //
+      //     $('.parse_address').text(gameScore.get("street_address"));
+      //     $('.parse_city').text(gameScore.get("city"));
+      //     $('.parse_state').text(gameScore.get("state"));
+      //
+      //     $('.parse_build').text(gameScore.get("build"));
+      //     $('.parse_lot_size').text(gameScore.get("lot_size")+" sq ft.");
+      //     $('.parse_bedrooms').text(gameScore.get("bedrooms"));
+      //     $('.parse_prop_area').text(gameScore.get("prop_area")+" sq ft.");
+      //
+      //     $('.parse_description').text(gameScore.get("description"));
+      //     $('.parse_price').text(gameScore.get("price_dollar"));
+      //
+      //     $('.parse_img_hero').attr("src",gameScore.get("img_hero")._url);
+      //
+      //     $('.parse_img_1').attr("src",gameScore.get("img_1")._url);
+      //     $('.parse_img_2').attr("src",gameScore.get("img_2")._url);
+      //     $('.parse_img_3').attr("src",gameScore.get("img_3")._url);
+      //     $('.parse_img_4').attr("src",gameScore.get("img_4")._url);
+      //
+      //   },
+      //   error: function(object, error) {
+      //     // The object was not retrieved successfully.
+      //     // error is a Parse.Error with an error code and message.
+      //   }
+      // });
+
+
+
+
+
 
     </script>
 
 
-    <script id="entry-template" type="text/x-handlebars-template">
-      <div class="col-md-6" style="height: 200px;">
-        <a href="https://quarteria.herokuapp.com/detail?id=1BjBaMjcGR">
-        <div style="float: left; width: 100%; height: 225px; overflow: hidden;">
-          <div style="background-color: #0d4a72; position: absolute; right: 15px; top: 15px; height: 40px; width: 150px; color: white; padding: 8px; padding-left: 15px;">
-            $3,456,789
-          </div>
-          <img src="http://quarteria.herokuapp.com/parse/files/G3HfIqqEKtetc6GzLV6gU1P8FRZdBRVW/32d0d39cb0a1afb8df8e0c4f11004876_16601829_10211977041804536_8773300925715390744_o.jpg" style="width: 100%;" height="auto" />
-        </div>
-        <div style="background-color: #41ada4; float: left; width: 100%; height: 40px; padding: 8px; padding-left: 10px; color: white;">
-          Something Something drive, <span style="font-weight:bold;">New York | USA</span>
-        </div>
-      </a>
-      </div>
-    </script>
+
 
 
   </body>
